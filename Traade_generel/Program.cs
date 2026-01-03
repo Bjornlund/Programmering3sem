@@ -40,13 +40,13 @@ namespace Traade_generel
 
         private static void ThreadMessageParam(object o)
         { 
-            string msg = (string)o;
+            string msg = (string)o; //caster til string
             Console.WriteLine($"Thread with param: {msg}");
         }
 
         private static void ThreadClassParam(object o)
         {
-            Animal cat = (Animal)o;
+            Animal cat = (Animal)o; 
             Console.WriteLine($"Animal class: {cat.Name}, {cat.Age}");
         }
 
