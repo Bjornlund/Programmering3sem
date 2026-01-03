@@ -10,6 +10,7 @@ namespace TCPServer
     //Tager imod alle klienter på port 12000
     //Echo string med suffix "From server"
     //Stanard TCP
+    //Sender/modtager strings, indbygget seperator \n
 
     internal class Program
     {
@@ -40,19 +41,20 @@ namespace TCPServer
             Guid clientID = Guid.NewGuid();
             Console.WriteLine($"Client {clientID} connected");
 
-            using StreamReader reader = new StreamReader(client.GetStream());
-            using StreamWriter writer = new StreamWriter(client.GetStream())
-            {
-                AutoFlush = true
-            };
 
             try
             {
+                using StreamReader reader = new StreamReader(client.GetStream());
+                using StreamWriter writer = new StreamWriter(client.GetStream())
+                {
+                    AutoFlush = true
+                };
+
                 string message;
                 while ((message = reader.ReadLine()) != null)
                 {
                     Console.WriteLine($"Received message from {clientID}: {message}");
-                    writer.WriteLine(message + " -From server");
+                    writer.WriteLine(message + " -From server"); //echoing client message
                 }
             }
             catch (Exception ex)
